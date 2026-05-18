@@ -8,7 +8,6 @@ namespace Inventory_Managment.Infrastructure.Data
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options){}
 
-        //Entities
         public DbSet<Product> Product { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<StockMovement> StockMovement { get; set; }
@@ -18,7 +17,6 @@ namespace Inventory_Managment.Infrastructure.Data
         {
             base.OnModelCreating(builder);
 
-            //Mappings
             builder.ApplyConfiguration(new ProductMapping());
             builder.ApplyConfiguration(new CategoryMapping());
             builder.ApplyConfiguration(new StockMovementMapping());
