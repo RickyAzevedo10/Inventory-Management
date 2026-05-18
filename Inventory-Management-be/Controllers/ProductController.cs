@@ -1,7 +1,4 @@
-using Inventory_Managment.Domain.Entities;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Inventory_Managment_be.Controllers
 {
