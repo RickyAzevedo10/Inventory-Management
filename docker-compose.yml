@@ -1,0 +1,6 @@
+services:
+  inventory-management-be:
+    image: ${DOCKER_REGISTRY-}inventorymanagmentbe
+    build:
+      context: .
+      dockerfile: Inventory-Management-be/Dockerfile

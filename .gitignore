@@ -1,0 +1,54 @@
+## Ignore Visual Studio cache e temporários
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Build results
+bin/
+obj/
+out/
+[Bb]uild/
+[Ll]og/
+
+## Arquivos de publicação
+publish/
+*.pubxml
+*.publishproj
+
+## Pacotes NuGet
+*.nupkg
+*.snupkg
+packages/
+*.nuget.props
+*.nuget.targets
+
+## Configurações locais
+appsettings.Development.json
+appsettings.Local.json
+
+## Ferramentas
+*.psess
+*.vsp
+*.vspx
+*.coverage
+*.coveragexml
+
+## Rider / JetBrains
+.idea/
+*.sln.iml
+
+## Arquivos de backup
+*.bak
+*.tmp
+
+## Sistema operativo
+Thumbs.db
+.DS_Store
+
+## Logs
+*.log
+
+## Outros
+*.db
