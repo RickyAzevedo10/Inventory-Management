@@ -1,14 +1,15 @@
 ﻿using Inventory_Managment.Application.Interfaces;
+using Inventory_Managment.Domain.Interfaces;
 
 namespace Inventory_Managment.Application.Services
 {
-    internal class ProductService : IProductService
+    public class ProductService : IProductService
     {
-        public ProductService()
+        private readonly IUnitOfWork _unitOfWork;
+
+        public ProductService(IUnitOfWork unitOfWork)
         {
-            
+            _unitOfWork = unitOfWork;
         }
-
-
     }
 }

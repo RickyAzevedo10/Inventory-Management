@@ -3,7 +3,7 @@ using Inventory_Managment.Infrastructure.Data.Repositories;
 
 namespace Inventory_Managment.Infrastructure.Data.Persistance
 {
-    internal class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly DataContext _context;
 
@@ -12,7 +12,7 @@ namespace Inventory_Managment.Infrastructure.Data.Persistance
             _context = context;
         }
 
-        public IProductRepository _productRepository { get; private set; }
+        private IProductRepository _productRepository = null!;
 
         public async Task<bool> CommitAsync()
         {

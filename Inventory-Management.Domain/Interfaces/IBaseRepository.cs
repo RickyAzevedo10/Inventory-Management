@@ -12,7 +12,7 @@ namespace Inventory_Managment.Domain.Interfaces
         Task<T> AddAsync(T entity);
         void Delete(T entity);
         IQueryable<T> GetEntity();
-        public Task<T> GetByIdAsync(long id);
+        public Task<T?> GetByIdAsync(long id);
         public Task<IEnumerable<T>> GetAllAsync();
         Task DeleteAllAsync();
         Task<T> UpdateAsync(T entity);

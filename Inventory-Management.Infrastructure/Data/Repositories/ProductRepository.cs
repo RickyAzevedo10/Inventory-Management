@@ -2,10 +2,10 @@
 using Inventory_Managment.Domain.Interfaces;
 using Inventory_Managment.Infrastructure.Data.Persistance;
 using Microsoft.EntityFrameworkCore;
-
+    
 namespace Inventory_Managment.Infrastructure.Data.Repositories
 {
-    internal class ProductRepository : BaseRepository<Product>, IProductRepository
+    public class ProductRepository : BaseRepository<Product>, IProductRepository
     {
         public ProductRepository(DataContext context) : base(context)
         {

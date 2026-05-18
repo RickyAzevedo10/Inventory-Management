@@ -20,7 +20,7 @@ namespace Inventory_Managment.Infrastructure.Data.Persistance
             return _dbSet.AsQueryable();
         }
 
-        public virtual async Task<T> GetByIdAsync(long id)
+        public virtual async Task<T?> GetByIdAsync(long id)
         {
             return await _dbSet.FindAsync(id);
         }
