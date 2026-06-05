@@ -8,7 +8,7 @@ namespace Inventory_Management.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IProductService, ProductHandler>();
 
             return services;
         }

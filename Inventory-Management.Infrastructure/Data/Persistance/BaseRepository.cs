@@ -37,6 +37,17 @@ namespace Inventory_Managment.Infrastructure.Data.Persistance
             return entity;
         }
 
+        public async Task<IEnumerable<T>> AddManyAsync(IEnumerable<T> entities)
+        {
+            var entitiesList = entities.ToList();
+            foreach (var entity in entitiesList)
+            {
+                entity.CreatedWhen = DateTime.Now;
+            }
+            await _dbSet.AddRangeAsync(entitiesList);
+            return entitiesList;
+        }
+
         public async Task<T> UpdateAsync(T entity)
         {
             entity.ChangedWhen = DateTime.Now;
@@ -44,7 +55,7 @@ namespace Inventory_Managment.Infrastructure.Data.Persistance
             await _context.SaveChangesAsync();
             return entity;
         }
-
+          
         public void Delete(T entity)
         {
             _dbSet.Remove(entity);

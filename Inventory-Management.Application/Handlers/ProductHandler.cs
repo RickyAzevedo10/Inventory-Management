@@ -3,11 +3,11 @@ using Inventory_Managment.Domain.Interfaces;
 
 namespace Inventory_Managment.Application.Services
 {
-    public class ProductService : IProductService
+    public class ProductHandler : IProductService
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public ProductService(IUnitOfWork unitOfWork)
+        public ProductHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

@@ -10,6 +10,7 @@ namespace Inventory_Managment.Domain.Interfaces
     public interface IBaseRepository<T> where T : BaseEntity
     {
         Task<T> AddAsync(T entity);
+        Task<IEnumerable<T>> AddManyAsync(IEnumerable<T> entities);
         void Delete(T entity);
         IQueryable<T> GetEntity();
         public Task<T?> GetByIdAsync(long id);

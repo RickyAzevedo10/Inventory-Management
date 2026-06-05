@@ -6,29 +6,19 @@ namespace Inventory_Managment.Infrastructure.Data.Persistance
     public class UnitOfWork : IUnitOfWork
     {
         private readonly DataContext _context;
+        private readonly IProductRepository _productRepository;
 
-        public UnitOfWork(DataContext context)
+        public UnitOfWork(DataContext context, IProductRepository productRepository)
         {
             _context = context;
+            _productRepository = productRepository;
         }
-
-        private IProductRepository _productRepository = null!;
 
         public async Task<bool> CommitAsync()
         {
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public IProductRepository ProductRepository
-        {
-            get
-            {
-                if (_productRepository == null)
-                {
-                    _productRepository = new ProductRepository(_context);
-                }
-                return _productRepository;
-            }
-        }
+        public IProductRepository ProductRepository => _productRepository;
     }
 }
