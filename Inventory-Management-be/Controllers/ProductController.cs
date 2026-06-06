@@ -1,33 +1,31 @@
+using Inventory_Managment.Application.Interfaces;
+using Inventory_Managment.Application.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inventory_Managment_be.Controllers
 {
+    /// <summary>
+    /// API controller that handles product-related endpoints.
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class ProductController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+        private readonly IProductService _productService;
 
-        private readonly ILogger<ProductController> _logger;
-
-        public ProductController(ILogger<ProductController> logger)
+        public ProductController(IProductService productService)
         {
-            _logger = logger;
+            _productService = productService;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        /// <summary>
+        /// Creates a new product.
+        /// </summary>
+        [HttpPost]
+        public async Task<IActionResult> CreateProduct([FromBody] CreateProductRequest request)
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            await _productService.CreateProductAsync(request);
+            return StatusCode(201, new { message = "Product created successfully" });
         }
 
         //Create product

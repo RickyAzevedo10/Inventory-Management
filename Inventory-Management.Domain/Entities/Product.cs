@@ -1,53 +1,68 @@
 ﻿namespace Inventory_Managment.Domain.Entities
 {
     /// <summary>
-    /// Represents a product stored in the inventory.
+    /// Represents a product entity with business rule validation in setters.
     /// </summary>
     public class Product : BaseEntity
     {
-        /// <summary>
-        /// Name of the product.
-        /// </summary>
-        public string Name { get; set; } = default!;
+        private string _name = default!;
+        private decimal _price;
+        private int _stockQuantity;
+        private string? _description;
 
-        /// <summary>
-        /// Optional description of the product.
-        /// </summary>
-        public string? Description { get; set; }
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                var trimmed = value?.Trim() ?? string.Empty;
+                if (trimmed.Length < 2)
+                    throw new ArgumentException("Product name must have at least 2 characters.");
+                _name = trimmed;
+            }
+        }
 
-        /// <summary>
-        /// Price of the product.
-        /// </summary>
-        public decimal Price { get; set; }
+        public string? Description
+        {
+            get => _description;
+            set
+            {
+                if (value is not null && value.Trim().Length < 5)
+                    throw new ArgumentException("Product description must have at least 5 characters when provided.");
+                _description = value?.Trim();
+            }
+        }
 
-        /// <summary>
-        /// Current stock quantity available.
-        /// </summary>
-        public int StockQuantity { get; set; }
+        public decimal Price
+        {
+            get => _price;
+            set
+            {
+                if (value <= 0)
+                    throw new ArgumentException("Product price must be greater than zero.");
+                if (value > 999_999.99m)
+                    throw new ArgumentException("Product price cannot exceed 999,999.99.");
+                _price = value;
+            }
+        }
 
-        /// <summary>
-        /// Identifier of the category the product belongs to.
-        /// </summary>
+        public int StockQuantity
+        {
+            get => _stockQuantity;
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentException("Stock quantity cannot be negative.");
+                if (value > 100_000)
+                    throw new ArgumentException("Stock quantity cannot exceed 100,000 units.");
+                _stockQuantity = value;
+            }
+        }
+
         public Guid CategoryId { get; set; }
-
-        /// <summary>
-        /// Navigation property for the product's category.
-        /// </summary>
         public Category Category { get; set; } = default!;
-
-        /// <summary>
-        /// Identifier of the supplier providing the product.
-        /// </summary>
         public Guid SupplierId { get; set; }
-
-        /// <summary>
-        /// Navigation property for the product's supplier.
-        /// </summary>
         public Supplier Supplier { get; set; } = default!;
-
-        /// <summary>
-        /// Collection of stock movements related to this product.
-        /// </summary>
         public ICollection<StockMovement> StockMovements { get; set; } = [];
     }
 }

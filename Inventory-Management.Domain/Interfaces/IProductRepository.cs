@@ -2,7 +2,7 @@
 
 namespace Inventory_Managment.Domain.Interfaces
 {
-    public interface IProductRepository
+    public interface IProductRepository : IBaseRepository<Product>
     {
         Task<Product?> GetByIdAsync(Guid id);
     }

@@ -2,6 +2,7 @@
 using Inventory_Managment.Infrastructure.Data;
 using Inventory_Managment.Infrastructure.Data.Persistance;
 using Inventory_Managment.Infrastructure.Data.Repositories;
+using Inventory_Managment.Infrastructure.Providers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,6 +17,7 @@ namespace Inventory_Management.Infrastructure
 
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IProductProvider, ProductProvider>();
 
             return services;
         }

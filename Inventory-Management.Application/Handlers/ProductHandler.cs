@@ -1,15 +1,43 @@
-﻿using Inventory_Managment.Application.Interfaces;
+﻿using FluentValidation;
+using Inventory_Managment.Application.Interfaces;
+using Inventory_Managment.Application.Models;
+using Inventory_Managment.Domain.Entities;
 using Inventory_Managment.Domain.Interfaces;
 
-namespace Inventory_Managment.Application.Services
+namespace Inventory_Managment.Application.Handlers
 {
+    /// <summary>
+    /// Handles product creation by validating input and persisting the entity.
+    /// </summary>
     public class ProductHandler : IProductService
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IProductProvider _productProvider;
+        private readonly IValidator<CreateProductRequest> _validator;
 
-        public ProductHandler(IUnitOfWork unitOfWork)
+        public ProductHandler(IProductProvider productProvider, IValidator<CreateProductRequest> validator)
         {
-            _unitOfWork = unitOfWork;
+            _productProvider = productProvider;
+            _validator = validator;
+        }
+
+        /// <summary>
+        /// Validates the request, maps it to a Product entity, and persists it.
+        /// </summary>
+        public async Task<Product> CreateProductAsync(CreateProductRequest request)
+        {
+            await _validator.ValidateAndThrowAsync(request);
+
+            var product = new Product
+            {
+                Name = request.Name,
+                Description = request.Description,
+                Price = request.Price,
+                StockQuantity = request.StockQuantity,
+                CategoryId = request.CategoryId,
+                SupplierId = request.SupplierId
+            };
+
+            return await _productProvider.CreateProductAsync(product);
         }
     }
 }
