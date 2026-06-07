@@ -1,19 +1,8 @@
 services:
-  inventory-management-be:
-    image: ${DOCKER_REGISTRY-}inventorymanagmentbe
-    build:
-      context: .
-      dockerfile: Inventory-Management-be/Dockerfile
-    depends_on:
-      sqlserver:
-        condition: service_healthy
-    environment:
-      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=MyDb;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True;"
-
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sqlserver_local
-    restart: always
+    restart: unless-stopped
     environment:
       ACCEPT_EULA: "Y"
       SA_PASSWORD: "YourStrong!Passw0rd"
@@ -22,11 +11,22 @@ services:
     volumes:
       - sqlserver_data:/var/opt/mssql
     healthcheck:
-      test: ["CMD", "/opt/mssql-tools/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "YourStrong!Passw0rd", "-Q", "SELECT 1"]
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P YourStrong!Passw0rd -Q 'SELECT 1'"]
       interval: 10s
       timeout: 5s
       retries: 10
-      start_period: 20s
+      start_period: 30s
+
+  inventory-management-be:
+    image: ${DOCKER_REGISTRY-}inventorymanagmentbe
+    build:
+      context: .
+      dockerfile: Inventory-Management-be/Dockerfile
+    depends_on:
+      - sqlserver
+    environment:
+      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=MyDb;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True;"
+    restart: unless-stopped
 
 volumes:
   sqlserver_data:
