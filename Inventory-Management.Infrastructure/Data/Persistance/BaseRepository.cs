@@ -1,5 +1,5 @@
 ﻿using Inventory_Managment.Domain.Entities;
-using Inventory_Managment.Domain.Interfaces;
+using Inventory_Managment.Domain.Interfaces.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace Inventory_Managment.Infrastructure.Data.Persistance
@@ -20,7 +20,7 @@ namespace Inventory_Managment.Infrastructure.Data.Persistance
             return _dbSet.AsQueryable();
         }
 
-        public virtual async Task<T?> GetByIdAsync(long id)
+        public virtual async Task<T?> GetByIdAsync(Guid id)
         {
             return await _dbSet.FindAsync(id);
         }
@@ -55,7 +55,7 @@ namespace Inventory_Managment.Infrastructure.Data.Persistance
             await _context.SaveChangesAsync();
             return entity;
         }
-          
+           
         public void Delete(T entity)
         {
             _dbSet.Remove(entity);
@@ -68,3 +68,4 @@ namespace Inventory_Managment.Infrastructure.Data.Persistance
         }
     }
 }
+

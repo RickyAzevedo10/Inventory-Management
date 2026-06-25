@@ -1,9 +1,9 @@
 ﻿using Inventory_Managment.Domain.Entities;
 
-namespace Inventory_Managment.Domain.Interfaces
+namespace Inventory_Managment.Domain.Interfaces.Repository
 {
     public interface IProductRepository : IBaseRepository<Product>
     {
-        Task<Product?> GetByIdAsync(Guid id);
+        // GetByIdAsync is now inherited from IBaseRepository<Product>
     }
 }

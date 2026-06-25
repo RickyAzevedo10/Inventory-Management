@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Inventory_Managment.Domain.Interfaces
+namespace Inventory_Managment.Domain.Interfaces.Repository
 {
     public interface IBaseRepository<T> where T : BaseEntity
     {
@@ -13,7 +13,7 @@ namespace Inventory_Managment.Domain.Interfaces
         Task<IEnumerable<T>> AddManyAsync(IEnumerable<T> entities);
         void Delete(T entity);
         IQueryable<T> GetEntity();
-        public Task<T?> GetByIdAsync(long id);
+        public Task<T?> GetByIdAsync(Guid id);
         public Task<IEnumerable<T>> GetAllAsync();
         Task DeleteAllAsync();
         Task<T> UpdateAsync(T entity);

@@ -1,5 +1,6 @@
 using Inventory_Managment.Domain.Entities;
-using Inventory_Managment.Domain.Interfaces;
+using Inventory_Managment.Domain.Interfaces.Provider;
+using Inventory_Managment.Domain.Interfaces.Repository;
 
 namespace Inventory_Managment.Infrastructure.Providers
 {

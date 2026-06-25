@@ -1,8 +1,8 @@
 ﻿using Inventory_Managment.Domain.Entities;
-using Inventory_Managment.Domain.Interfaces;
+using Inventory_Managment.Domain.Interfaces.Repository;
 using Inventory_Managment.Infrastructure.Data.Persistance;
 using Microsoft.EntityFrameworkCore;
-    
+
 namespace Inventory_Managment.Infrastructure.Data.Repositories
 {
     public class ProductRepository : BaseRepository<Product>, IProductRepository
@@ -11,7 +11,7 @@ namespace Inventory_Managment.Infrastructure.Data.Repositories
         {
         }
 
-        public async Task<Product?> GetByIdAsync(Guid id)
+        public override async Task<Product?> GetByIdAsync(Guid id)
         {
             return await GetEntity().FirstOrDefaultAsync(u => u.Id == id);
         }

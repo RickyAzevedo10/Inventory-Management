@@ -1,6 +1,6 @@
 using Inventory_Managment.Domain.Entities;
 
-namespace Inventory_Managment.Domain.Interfaces
+namespace Inventory_Managment.Domain.Interfaces.Provider
 {
     /// <summary>
     /// Defines the contract for product data persistence operations.

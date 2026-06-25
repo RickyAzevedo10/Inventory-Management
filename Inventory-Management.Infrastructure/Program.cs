@@ -1,4 +1,5 @@
-﻿using Inventory_Managment.Domain.Interfaces;
+﻿using Inventory_Managment.Domain.Interfaces.Provider;
+using Inventory_Managment.Domain.Interfaces.Repository;
 using Inventory_Managment.Infrastructure.Data;
 using Inventory_Managment.Infrastructure.Data.Persistance;
 using Inventory_Managment.Infrastructure.Data.Repositories;
@@ -16,8 +17,12 @@ namespace Inventory_Management.Infrastructure
                 options.UseSqlServer(connectionString));
 
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ISupplierRepository, SupplierRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IProductProvider, ProductProvider>();
+            services.AddScoped<ICategoryProvider, CategoryProvider>();
+            services.AddScoped<ISupplierProvider, SupplierProvider>();
 
             return services;
         }
