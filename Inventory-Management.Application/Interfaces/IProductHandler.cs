@@ -6,7 +6,7 @@ namespace Inventory_Managment.Application.Interfaces
     /// <summary>
     /// Defines the contract for product service operations.
     /// </summary>
-    public interface IProductService
+    public interface IProductHandler
     {
         Task<Product> CreateProductAsync(CreateProductRequest request);
     }

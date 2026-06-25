@@ -11,9 +11,9 @@ namespace Inventory_Managment_be.Controllers
     [Route("[controller]")]
     public class ProductController : ControllerBase
     {
-        private readonly IProductService _productService;
+        private readonly IProductHandler _productService;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductHandler productService)
         {
             _productService = productService;
         }

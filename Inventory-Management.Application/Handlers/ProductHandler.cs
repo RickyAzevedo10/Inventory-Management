@@ -9,7 +9,7 @@ namespace Inventory_Managment.Application.Handlers
     /// <summary>
     /// Handles product creation by validating input and persisting the entity.
     /// </summary>
-    public class ProductHandler : IProductService
+    public class ProductHandler : IProductHandler
     {
         private readonly IProductProvider _productProvider;
         private readonly IValidator<CreateProductRequest> _validator;

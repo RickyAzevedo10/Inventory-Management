@@ -10,7 +10,7 @@ namespace Inventory_Management.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddScoped<IProductService, ProductHandler>();
+            services.AddScoped<IProductHandler, ProductHandler>();
             services.AddValidatorsFromAssemblyContaining<CreateProductValidator>();
 
             return services;
