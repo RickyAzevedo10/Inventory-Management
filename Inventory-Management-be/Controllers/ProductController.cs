@@ -24,8 +24,8 @@ namespace Inventory_Managment_be.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateProduct([FromBody] CreateProductRequest request)
         {
-            await _productService.CreateProductAsync(request);
-            return StatusCode(201, new { message = "Product created successfully" });
+            var product = await _productService.CreateProductAsync(request);
+            return CreatedAtAction(nameof(CreateProduct), new { id = product.Id }, product);
         }
 
         //Create product
